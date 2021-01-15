@@ -10,14 +10,16 @@ class App extends Component {
 
   removeCharacter = index => {
     const { characters } = this.state
-
-    console.log(characters[index])
-    this.makeDelCall(characters, index)
-    this.setState({
-      characters: characters.filter((character, i) => {
-        return i !== index
-      }),
-    })
+    
+    this.makeDelCall(characters, index).then( callResult => {
+      if (callResult === true) {
+        this.setState({
+          characters: characters.filter((character, i) => {
+            return i !== index
+          }),
+        })
+      }
+    });
   }
 
   makeDelCall(characters, index) {
